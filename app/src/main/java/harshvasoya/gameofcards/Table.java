@@ -11,6 +11,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,11 +31,11 @@ public class Table extends Activity {
     TextView text_money_cpu1,text_money_cpu2,text_money_cpu3,text_money_cpu4;
     TextView text_human_money,text_pot;
 
-    TextView cpu1_card1,cpu1_card2,cpu1_card3;
-    TextView cpu2_card1,cpu2_card2,cpu2_card3;
-    TextView cpu3_card1,cpu3_card2,cpu3_card3;
-    TextView cpu4_card1,cpu4_card2,cpu4_card3;
-    TextView player_card1,player_card2,player_card3;
+    ImageView cpu1_card1,cpu1_card2,cpu1_card3;
+    ImageView cpu2_card1,cpu2_card2,cpu2_card3;
+    ImageView cpu3_card1,cpu3_card2,cpu3_card3;
+    ImageView cpu4_card1,cpu4_card2,cpu4_card3;
+    ImageView player_card1,player_card2,player_card3;
 
     TableRow cards_cpu1,cards_cpu2,cards_cpu3,cards_cpu4,cards_human;
 
@@ -43,6 +44,7 @@ public class Table extends Activity {
     Button fold,show,call,raise,minus,plus;
     TextView text_raise_amt,text_call_amt;
     boolean isShowEnabled;
+    String card1,card2,card3;
 
     TextToSpeech textToSpeech;
 
@@ -71,25 +73,25 @@ public class Table extends Activity {
         cards_cpu4 = (TableRow)findViewById(R.id.cards_cpu4);
         cards_human = (TableRow)findViewById(R.id.cards_human);
 
-        player_card1 = (TextView)findViewById(R.id.human_card1);
-        player_card2 = (TextView)findViewById(R.id.human_card2);
-        player_card3 = (TextView)findViewById(R.id.human_card3);
+        player_card1 = (ImageView)findViewById(R.id.human_card1);
+        player_card2 = (ImageView)findViewById(R.id.human_card2);
+        player_card3 = (ImageView)findViewById(R.id.human_card3);
 
-        cpu1_card1 = (TextView)findViewById(R.id.cpu1_cardnum1);
-        cpu1_card2 = (TextView)findViewById(R.id.cpu1_card2);
-        cpu1_card3 = (TextView)findViewById(R.id.cpu1_card3);
+        cpu1_card1 = (ImageView)findViewById(R.id.cpu1_cardnum1);
+        cpu1_card2 = (ImageView)findViewById(R.id.cpu1_card2);
+        cpu1_card3 = (ImageView)findViewById(R.id.cpu1_car3);
 
-        cpu2_card1 = (TextView)findViewById(R.id.cpu2_cardnum1);
-        cpu2_card2 = (TextView)findViewById(R.id.cpu2_card2);
-        cpu2_card3 = (TextView)findViewById(R.id.cpu2_card3);
+        cpu2_card1 = (ImageView)findViewById(R.id.cpu2_cardnum1);
+        cpu2_card2 = (ImageView)findViewById(R.id.cpu2_card2);
+        cpu2_card3 = (ImageView)findViewById(R.id.cpu2_card3);
 
-        cpu3_card1 = (TextView)findViewById(R.id.cpu3_cardnum1);
-        cpu3_card2 = (TextView)findViewById(R.id.cpu3_card2);
-        cpu3_card3 = (TextView)findViewById(R.id.cpu3_card3);
+        cpu3_card1 = (ImageView)findViewById(R.id.cpu3_cardnum1);
+        cpu3_card2 = (ImageView)findViewById(R.id.cpu3_card2);
+        cpu3_card3 = (ImageView)findViewById(R.id.cpu3_card3);
 
-        cpu4_card1 = (TextView)findViewById(R.id.cpu4_cardnum1);
-        cpu4_card2 = (TextView)findViewById(R.id.cpu4_card2);
-        cpu4_card3 = (TextView)findViewById(R.id.cpu4_card3);
+        cpu4_card1 = (ImageView)findViewById(R.id.cpu4_cardnum1);
+        cpu4_card2 = (ImageView)findViewById(R.id.cpu4_card2);
+        cpu4_card3 = (ImageView)findViewById(R.id.cpu4_card3);
 
         fn_bar = (TableRow)findViewById(R.id.fn_bar);
         fold = (Button)findViewById(R.id.btn_fold);
@@ -152,6 +154,8 @@ public class Table extends Activity {
             @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
+
+                Log.d("checking deal button","fdsA");
 
                 name_human.setBackground(getDrawable(R.color.black_overlay));
                 name_cpu1.setBackground(getDrawable(R.color.black_overlay));
@@ -218,28 +222,44 @@ public class Table extends Activity {
                 text_raise_amt.setText(String.valueOf(amt_raise));
 
                 if (!cpu1.isOut) {
-                    cpu1_card1.setText("??");
-                    cpu1_card2.setText("??");
-                    cpu1_card3.setText("??");
+                    cpu1_card1.setImageResource(R.drawable.card1);
+                    cpu1_card2.setImageResource(R.drawable.card1);
+                    cpu1_card3.setImageResource(R.drawable.card1);
                 }
                 if (!cpu2.isOut) {
-                    cpu2_card1.setText("??");
-                    cpu2_card2.setText("??");
-                    cpu2_card3.setText("??");
+                    cpu2_card1.setImageResource(R.drawable.card2);
+                    cpu2_card2.setImageResource(R.drawable.card2);
+                    cpu2_card3.setImageResource(R.drawable.card2);
                 }
                 if (!cpu3.isOut) {
-                    cpu3_card1.setText("??");
-                    cpu3_card2.setText("??");
-                    cpu3_card3.setText("??");
+                    cpu3_card1.setImageResource(R.drawable.card3);
+                    cpu3_card2.setImageResource(R.drawable.card3);
+                    cpu3_card3.setImageResource(R.drawable.card3);
                 }
                 if (!cpu4.isOut) {
-                    cpu4_card1.setText("??");
-                    cpu4_card2.setText("??");
-                    cpu4_card3.setText("??");
+                    cpu4_card1.setImageResource(R.drawable.card4);
+                    cpu4_card2.setImageResource(R.drawable.card4);
+                    cpu4_card3.setImageResource(R.drawable.card4);
                 }
-                player_card1.setText(human.hand.get(0).toString());
-                player_card2.setText(human.hand.get(1).toString());
-                player_card3.setText(human.hand.get(2).toString());
+//                player_card1.setText(human.hand.get(0).toString());
+//                player_card2.setText(human.hand.get(1).toString());
+//                player_card3.setText(human.hand.get(2).toString());
+//                Log.d("checking card:",card1);
+//                card2=checkCard(human.hand.get(1).toString());
+//                Log.d("checking card:",card2);
+//                card3=checkCard(human.hand.get(2).toString());
+//                Log.d("checking card:",card3);
+//                String draw=card1;
+//                Log.d("checking string","prnting"+Integer.parseInt(draw));
+                card1=checkCard(human.hand.get(0).toString());
+                int id1=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card1,null,null);
+                player_card1.setImageResource(id1);
+                card2=checkCard(human.hand.get(1).toString());
+                int id2=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card2,null,null);
+                player_card2.setImageResource(id2);
+                card3=checkCard(human.hand.get(2).toString());
+                int id3=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card3,null,null);
+                player_card3.setImageResource(id3);
 
                 deal.setVisibility(View.INVISIBLE);
                 cards_human.setVisibility(View.VISIBLE);
@@ -269,7 +289,7 @@ public class Table extends Activity {
                 cards_human.setVisibility(View.INVISIBLE);
 
                 human.isPlaying=false;
-               // textToSpeech.speak("fold",textToSpeech.QUEUE_FLUSH,null,null);
+                // textToSpeech.speak("fold",textToSpeech.QUEUE_FLUSH,null,null);
 
                 name_human.setBackground(getDrawable(R.color.black_overlay));
 
@@ -702,24 +722,63 @@ public class Table extends Activity {
 
     public void showCPUCards(){
         if (cpu1.isPlaying) {
-            cpu1_card1.setText(cpu1.hand.get(0).toString());
-            cpu1_card2.setText(cpu1.hand.get(1).toString());
-            cpu1_card3.setText(cpu1.hand.get(2).toString());
+//            cpu1_card1.setText(cpu1.hand.get(0).toString());
+//            cpu1_card2.setText(cpu1.hand.get(1).toString());
+//            cpu1_card3.setText(cpu1.hand.get(2).toString());
+            card1=checkCard(cpu1.hand.get(0).toString());
+            int id1=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card1,null,null);
+            cpu1_card1.setImageResource(id1);
+            card2=checkCard(cpu1.hand.get(1).toString());
+            int id2=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card2,null,null);
+            cpu1_card2.setImageResource(id2);
+            card3=checkCard(cpu1.hand.get(2).toString());
+            int id3=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card3,null,null);
+            cpu1_card2.setImageResource(id3);
         }
         if (cpu2.isPlaying) {
-            cpu2_card1.setText(cpu2.hand.get(0).toString());
-            cpu2_card2.setText(cpu2.hand.get(1).toString());
-            cpu2_card3.setText(cpu2.hand.get(2).toString());
+//            cpu2_card1.setText(cpu2.hand.get(0).toString());
+//            cpu2_card2.setText(cpu2.hand.get(1).toString());
+//            cpu2_card3.setText(cpu2.hand.get(2).toString());
+
+            card1=checkCard(cpu2.hand.get(0).toString());
+            int id1=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card1,null,null);
+            cpu1_card1.setImageResource(id1);
+            card2=checkCard(cpu2.hand.get(1).toString());
+            int id2=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card2,null,null);
+            cpu1_card2.setImageResource(id2);
+            card3=checkCard(cpu2.hand.get(2).toString());
+            int id3=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card3,null,null);
+            cpu1_card2.setImageResource(id3);
         }
         if (cpu3.isPlaying) {
-            cpu3_card1.setText(cpu3.hand.get(0).toString());
-            cpu3_card2.setText(cpu3.hand.get(1).toString());
-            cpu3_card3.setText(cpu3.hand.get(2).toString());
+//            cpu3_card1.setText(cpu3.hand.get(0).toString());
+//            cpu3_card2.setText(cpu3.hand.get(1).toString());
+//            cpu3_card3.setText(cpu3.hand.get(2).toString());
+
+            card1=checkCard(cpu3.hand.get(0).toString());
+            int id1=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card1,null,null);
+            cpu1_card1.setImageResource(id1);
+            card2=checkCard(cpu3.hand.get(1).toString());
+            int id2=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card2,null,null);
+            cpu1_card2.setImageResource(id2);
+            card3=checkCard(cpu3.hand.get(2).toString());
+            int id3=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card3,null,null);
+            cpu1_card2.setImageResource(id3);
         }
         if (cpu4.isPlaying) {
-            cpu4_card1.setText(cpu4.hand.get(0).toString());
-            cpu4_card2.setText(cpu4.hand.get(1).toString());
-            cpu4_card3.setText(cpu4.hand.get(2).toString());
+//            cpu4_card1.setText(cpu4.hand.get(0).toString());
+//            cpu4_card2.setText(cpu4.hand.get(1).toString());
+//            cpu4_card3.setText(cpu4.hand.get(2).toString());
+
+            card1=checkCard(cpu4.hand.get(0).toString());
+            int id1=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card1,null,null);
+            cpu1_card1.setImageResource(id1);
+            card2=checkCard(cpu4.hand.get(1).toString());
+            int id2=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card2,null,null);
+            cpu1_card2.setImageResource(id2);
+            card3=checkCard(cpu4.hand.get(2).toString());
+            int id3=getResources().getIdentifier("com.example.hardikmodi.game_of_cards:drawable/"+card3,null,null);
+            cpu1_card2.setImageResource(id3);
         }
     }
 
@@ -853,6 +912,226 @@ public class Table extends Activity {
         };
         Thread sideThread = new Thread(blinker);
         sideThread.start();
+    }
+
+    public String checkCard(String card){
+        if(card.equals("SA")){
+            card="as";
+            return card;
+        }
+        else if(card.equals("S2")){
+            card="s2";
+            return card;
+        }
+        else if(card.equals("S3")){
+            card="s3";
+            return card;
+        }
+        else if(card.equals("S4")){
+            card="s4";
+            return card;
+        }
+        else if(card.equals("S5")){
+            card="s5";
+            return card;
+        }
+        else if(card.equals("S6")){
+            card="s6";
+            return card;
+        }
+        else if(card.equals("S7")){
+            card="s7";
+            return card;
+        }
+        else if(card.equals("S8")){
+            card="s8";
+            return card;
+        }
+        else if(card.equals("S9")){
+            card="s9";
+            return card;
+        }
+        else if(card.equals("S10")){
+            card="s10";
+            return card;
+        }
+        else if(card.equals("SJ")){
+            card="js";
+            return card;
+        }
+        else if(card.equals("SQ")){
+            card="qs";
+            return card;
+        }
+        else if(card.equals("SK")){
+            card="ks";
+            return card;
+        }
+
+
+        else if(card.equals("CA")){
+            card="ac";
+            return card;
+        }
+        else if(card.equals("C2")){
+            card="c2";
+            return card;
+        }
+        else if(card.equals("C3")){
+            card="c3";
+            return card;
+        }
+        else if(card.equals("C4")){
+            card="c4";
+            return card;
+        }
+        else if(card.equals("C5")){
+            card="c5";
+            return card;
+        }
+        else if(card.equals("C6")){
+            card="c6";
+            return card;
+        }
+        else if(card.equals("C7")){
+            card="c7";
+            return card;
+        }
+        else if(card.equals("C8")){
+            card="c8";
+            return card;
+        }
+        else if(card.equals("C9")){
+            card="c9";
+            return card;
+        }
+        else if(card.equals("C10")){
+            card="c10";
+            return card;
+        }
+        else if(card.equals("CJ")){
+            card="jc";
+            return card;
+        }
+        else if(card.equals("CQ")){
+            card="qc";
+            return card;
+        }
+        else if(card.equals("CK")){
+            card="kc";
+            return card;
+        }
+
+
+
+        else if(card.equals("DA")){
+            card="ad";
+            return card;
+        }
+        else if(card.equals("D2")){
+            card="d2";
+            return card;
+        }
+        else if(card.equals("D3")){
+            card="d3";
+            return card;
+        }
+        else if(card.equals("D4")){
+            card="d4";
+            return card;
+        }
+        else if(card.equals("D5")){
+            card="d5";
+            return card;
+        }
+        else if(card.equals("D6")){
+            card="d6";
+            return card;
+        }
+        else if(card.equals("D7")){
+            card="d7";
+            return card;
+        }
+        else if(card.equals("D8")){
+            card="d8";
+            return card;
+        }
+        else if(card.equals("D9")){
+            card="d9";
+            return card;
+        }
+        else if(card.equals("D10")){
+            card="d10";
+            return card;
+        }
+        else if(card.equals("DJ")){
+            card="jd";
+            return card;
+        }
+        else if(card.equals("DQ")){
+            card="qd";
+            return card;
+        }
+        else if(card.equals("DK")){
+            card="kd";
+            return card;
+        }
+
+
+
+        else if(card.equals("HA")){
+            card="ah";
+            return card;
+        }
+        else if(card.equals("H2")){
+            card="h2";
+            return card;
+        }
+        else if(card.equals("H3")){
+            card="h3";
+            return card;
+        }
+        else if(card.equals("H4")){
+            card="h4";
+            return card;
+        }
+        else if(card.equals("H5")){
+            card="h5";
+            return card;
+        }
+        else if(card.equals("H6")){
+            card="h6";
+            return card;
+        }
+        else if(card.equals("H7")){
+            card="h7";
+            return card;
+        }
+        else if(card.equals("H8")){
+            card="h8";
+            return card;
+        }
+        else if(card.equals("H9")){
+            card="h9";
+            return card;
+        }
+        else if(card.equals("H10")){
+            card="h10";
+            return card;
+        }
+        else if(card.equals("HJ")){
+            card="jh";
+            return card;
+        }
+        else if(card.equals("HQ")){
+            card="qh";
+            return card;
+        }
+        else if(card.equals("HK")){
+            card="kh";
+            return card;
+        }
+        return "0";
     }
 
     Handler endings = new Handler() {
